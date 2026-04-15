@@ -6,7 +6,7 @@
   <title>株式会社シャングリラ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -14,186 +14,197 @@
 </head>
 <body>
 
-  <!-- Loader -->
-  <div id="loader" class="loader">
-    <span id="loaderCount" class="loader-count">0</span>
-  </div>
-
-  <!-- Nav -->
-  <nav id="nav" class="nav">
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
     <a href="#" class="nav-logo">
-      <svg width="9" height="9" viewBox="0 0 9 9"><rect width="9" height="9" fill="var(--g)"/></svg>
-      SHANGRILA
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect x=".5" y=".5" width="13" height="13" stroke="var(--g)" stroke-width="1.2"/>
+        <path d="M3.5 7l3 3 4-5" stroke="var(--g)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      株式会社シャングリラ
     </a>
-    <div class="nav-right">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#works">事業</a></li>
-        <li><a href="#concept">理念</a></li>
-        <li><a href="#contact">連絡</a></li>
-      </ul>
-      <a href="#contact" class="nav-cta">お問い合わせ</a>
-      <button class="nav-toggle" id="menuBtn"><span></span><span></span></button>
-    </div>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#hero">ホーム</a></li>
+      <li><a href="#about">会社について</a></li>
+      <li><a href="#services">事業内容</a></li>
+      <li><a href="#concept">コンセプト</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+    <a href="#contact" class="nav-btn">お問い合わせ</a>
+    <button class="nav-hamburger" id="menuBtn"><span></span><span></span></button>
   </nav>
 
-  <!-- ① HERO — 巨大タイポグラフィ -->
-  <section class="hero">
-    <canvas id="heroCanvas" class="hero-canvas"></canvas>
-    <div class="hero-inner">
-      <p class="hero-meta">
-        <span class="hero-dot"></span>株式会社シャングリラ&ensp;/&ensp;Shangrila Co., Ltd.
-      </p>
-      <h1 class="hero-h1" id="heroH1">
-        <span class="h1-line" id="hl1">時間が、</span>
-        <span class="h1-line h1-accent" id="hl2">可能性を</span>
-        <span class="h1-line" id="hl3">ひらく。</span>
+  <!-- SECTION 1: HERO -->
+  <section class="sec sec-hero" id="hero">
+    <!-- 右側ジオメトリック要素（ACES風） -->
+    <div class="geo" aria-hidden="true">
+      <div class="geo-slab">
+        <div class="geo-grid">
+          <div class="geo-block geo-block--1"></div>
+          <div class="geo-block geo-block--2"></div>
+          <div class="geo-block geo-block--3"></div>
+          <div class="geo-block geo-block--4"></div>
+          <div class="geo-block geo-block--5"></div>
+          <div class="geo-block geo-block--6"></div>
+          <div class="geo-block geo-block--7"></div>
+          <div class="geo-block geo-block--8"></div>
+          <div class="geo-block geo-block--9"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 左側コンテンツ -->
+    <div class="sec-content">
+      <h1 class="hero-title" id="heroTitle">
+        <span class="ht-line" id="htl1">時間が、</span>
+        <span class="ht-line ht-green" id="htl2">可能性を</span>
+        <span class="ht-line" id="htl3">ひらく。</span>
       </h1>
-      <p class="hero-body" id="heroBody">業務改善・AI・デジタルで余白をつくる。<br>その余白が、新しい選択肢になる。</p>
+      <div class="hero-tabs" id="heroTabs">
+        <button class="htab htab--active" data-tab="mission">Mission</button>
+        <div class="htab-sep"></div>
+        <button class="htab" data-tab="vision">Vision</button>
+      </div>
+      <div class="htab-content" id="tabMission">
+        <p>業務改善・デジタル化・AIの力で<br>企業と個人の「時間」を生み出す。</p>
+      </div>
+      <div class="htab-content htab-content--hidden" id="tabVision">
+        <p>誰もが自由に選択できる社会——<br>理想郷をつくることが私たちの目標。</p>
+      </div>
     </div>
-    <div class="hero-bottom">
-      <a href="#works" class="hero-arrow">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1"/>
-          <path d="M14 18l6 6 6-6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <span class="hero-scroll-txt">Scroll</span>
+
+    <div class="sec-meta">/ Shangrila Co., Ltd.</div>
+  </section>
+
+  <!-- SECTION 2: ABOUT -->
+  <section class="sec sec-about" id="about">
+    <div class="sec-meta">/ 会社について</div>
+    <div class="sec-content sec-content--center">
+      <p class="sec-statement">
+        株式会社シャングリラは、<br>
+        Web制作・IT・AI・マーケティング・民泊まで<br>
+        幅広いデジタル領域で企業の成長を支援する<br>
+        総合デジタルサポート企業です。
+      </p>
+      <div class="about-stats">
+        <div class="astat">
+          <strong><span class="cnum" data-to="6">0</span></strong>
+          <span>事業領域</span>
+        </div>
+        <div class="astat">
+          <strong><span class="cnum" data-to="50">0</span>+</strong>
+          <span>制作実績</span>
+        </div>
+        <div class="astat">
+          <strong>24<small>h</small></strong>
+          <span>デジタル対応</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ② TICKER -->
-  <div class="ticker">
-    <div class="ticker-track" id="tickerTrack">
-      <b>Web制作</b><em>/</em><b>IT業務改善</b><em>/</em><b>AI人材育成</b><em>/</em>
-      <b>マーケティング</b><em>/</em><b>MEO·SEO·AIO</b><em>/</em>
-      <b>民泊運営</b><em>/</em><b>宿泊施設撮影</b><em>/</em>
-      <b>Web制作</b><em>/</em><b>IT業務改善</b><em>/</em><b>AI人材育成</b><em>/</em>
-      <b>マーケティング</b><em>/</em><b>MEO·SEO·AIO</b><em>/</em>
-      <b>民泊運営</b><em>/</em><b>宿泊施設撮影</b><em>/</em>
+  <!-- SECTION 3: SERVICES -->
+  <section class="sec sec-services" id="services">
+    <div class="sec-meta">/ 事業内容</div>
+    <div class="svc-tabs">
+      <button class="stab stab--active" data-stab="digital">デジタル事業</button>
+      <button class="stab" data-stab="space">スペース事業</button>
     </div>
-  </div>
 
-  <!-- ③ SERVICES — 数字をグラフィックに -->
-  <section class="works" id="works">
-    <div class="works-head">
-      デジタルで、ビジネスを前に進める。
-    </div>
-    <div class="works-list">
-      <div class="wk-item">
-        <span class="wk-bg-num">01</span>
-        <div class="wk-content">
+    <div class="stab-panel" id="svcDigital">
+      <p class="sec-statement sec-statement--sm">
+        AIとデジタルの力で、ビジネスを前進させる4つの事業。
+      </p>
+      <div class="svc-cards">
+        <div class="svc-card">
+          <div class="svc-card-num">01</div>
           <h3>ウェブサイト制作</h3>
-          <p>戦略・設計・実装まで一貫対応。集客・信頼・成果にこだわったサイトを届けます。</p>
-          <div class="wk-tags"><span>企業サイト</span><span>LP</span><span>EC</span></div>
+          <p>戦略・設計・実装まで一貫対応。集客・信頼・成果にこだわったサイト。</p>
         </div>
-      </div>
-      <div class="wk-item">
-        <span class="wk-bg-num">02</span>
-        <div class="wk-content">
+        <div class="svc-card">
+          <div class="svc-card-num">02</div>
           <h3>IT業務改善支援</h3>
-          <p>無駄な業務を洗い出し、ツール導入と自動化で時間を生み出します。</p>
-          <div class="wk-tags"><span>業務分析</span><span>自動化</span><span>DX</span></div>
+          <p>業務の無駄を洗い出し、ツール導入と自動化で時間を生み出す。</p>
         </div>
-      </div>
-      <div class="wk-item wk-item--green">
-        <span class="wk-bg-num">03</span>
-        <div class="wk-content">
+        <div class="svc-card svc-card--accent">
+          <div class="svc-card-num">03</div>
           <h3>AIエージェント<br>マネージャー育成</h3>
-          <p>ChatGPT・Claudeを使いこなす人材を社内育成。AI内製化を支援します。</p>
-          <div class="wk-tags"><span>研修</span><span>ChatGPT</span><span>Claude</span></div>
+          <p>ChatGPT・Claude等のAIを使いこなす人材を社内で育成する。</p>
         </div>
-      </div>
-      <div class="wk-item">
-        <span class="wk-bg-num">04</span>
-        <div class="wk-content">
+        <div class="svc-card">
+          <div class="svc-card-num">04</div>
           <h3>デジタルマーケティング</h3>
-          <p>SNS・Web広告・MEO/SEO/AIO対策。データで集客を最大化します。</p>
-          <div class="wk-tags"><span>SNS</span><span>広告</span><span>SEO/AIO</span></div>
+          <p>SNS・広告・MEO/SEO/AIO対策。データで集客を最大化する。</p>
         </div>
       </div>
-      <div class="wk-item">
-        <span class="wk-bg-num">05</span>
-        <div class="wk-content">
+    </div>
+
+    <div class="stab-panel stab-panel--hidden" id="svcSpace">
+      <p class="sec-statement sec-statement--sm">
+        宿泊施設に特化した、2つの運営支援サービス。
+      </p>
+      <div class="svc-cards">
+        <div class="svc-card">
+          <div class="svc-card-num">05</div>
           <h3>民泊運営代行</h3>
-          <p>Airbnbの予約管理・ゲスト対応を代行。オーナーの手間をゼロに近づけます。</p>
-          <div class="wk-tags"><span>Airbnb</span><span>運営代行</span></div>
+          <p>Airbnb等の予約管理からゲスト対応まで全て代行。オーナーの手間をゼロに。</p>
         </div>
-      </div>
-      <div class="wk-item">
-        <span class="wk-bg-num">06</span>
-        <div class="wk-content">
+        <div class="svc-card">
+          <div class="svc-card-num">06</div>
           <h3>宿泊施設特化型撮影</h3>
-          <p>プロ撮影で予約率を大幅改善。施設の魅力を最大限に引き出します。</p>
-          <div class="wk-tags"><span>プロ撮影</span><span>民泊</span></div>
+          <p>プロ撮影で予約率を大幅改善。施設の魅力を引き出すビジュアルを提供。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ④ CONCEPT — フルブリード暗転 -->
-  <section class="concept" id="concept">
-    <div class="concept-inner">
-      <h2 class="concept-title">
+  <!-- SECTION 4: CONCEPT -->
+  <section class="sec sec-concept" id="concept">
+    <div class="sec-meta sec-meta--light">/ コンセプト</div>
+    <div class="sec-content">
+      <h2 class="concept-title" id="conceptTitle">
         <span>時間は、</span>
-        <span class="c-green">選択肢</span>
-        <span>をつくる。</span>
+        <span>選択肢をつくる。</span>
       </h2>
-      <p class="concept-body">業務改善・AI・デジタルの力で企業と個人の余白を生み出す。その余白こそが新しい挑戦への選択肢となり、誰もが自由に選べる世の中——<em>理想郷</em>の実現につながる。</p>
+      <p class="concept-body">
+        業務改善・デジタル化・AIで余白を生み出す。<br>
+        その余白が挑戦への選択肢となり、<br>
+        誰もが自由に選べる社会——<em>理想郷</em>の実現につながる。
+      </p>
     </div>
-    <div class="concept-stats">
-      <div class="cs">
-        <strong><span class="count-num" data-to="50">0</span>+</strong>
-        <span>制作実績</span>
-      </div>
-      <div class="cs">
-        <strong><span class="count-num" data-to="6">0</span></strong>
-        <span>事業領域</span>
-      </div>
-      <div class="cs">
-        <strong><span class="count-num" data-to="100">0</span>%</strong>
-        <span>デジタル対応</span>
+    <!-- ジオメトリック（右側・緑） -->
+    <div class="geo geo--light" aria-hidden="true">
+      <div class="geo-slab geo-slab--green">
+        <div class="geo-grid">
+          <div class="geo-block geo-block--1"></div>
+          <div class="geo-block geo-block--2"></div>
+          <div class="geo-block geo-block--3"></div>
+          <div class="geo-block geo-block--4"></div>
+          <div class="geo-block geo-block--5"></div>
+          <div class="geo-block geo-block--6"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ⑤ ABOUT — 会社情報 -->
-  <section class="about" id="about">
-    <div class="about-watermark" aria-hidden="true">理想郷</div>
-    <div class="about-inner">
-      <h2 class="about-title">株式会社<br>シャングリラ</h2>
-      <div class="about-data">
-        <p class="about-tagline">業務をスマートに。時間を自由に。理想郷をつくる。</p>
-        <dl class="about-dl">
-          <div><dt>英語名</dt><dd>Shangrila Co., Ltd.</dd></div>
-          <div><dt>設立</dt><dd>2024年</dd></div>
-          <div><dt>所在地</dt><dd>日本</dd></div>
-          <div><dt>事業</dt><dd>Web制作 / IT改善 / AI育成<br>マーケティング / 民泊 / 撮影</dd></div>
-        </dl>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑥ CONTACT — シンプル大胆 -->
-  <section class="contact" id="contact">
-    <div class="contact-inner">
-      <p class="contact-sup">まずは話しましょう</p>
-      <h2 class="contact-title">
-        <a href="mailto:info@shangrila.co.jp">
-          info@<br>shangrila<br>.co.jp
-          <svg class="contact-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1"/>
-            <path d="M16 32L32 16M32 16H16M32 16v16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+  <!-- SECTION 5: CONTACT -->
+  <section class="sec sec-contact" id="contact">
+    <div class="sec-meta">/ お問い合わせ</div>
+    <div class="sec-content">
+      <p class="contact-sup">Let's Work Together</p>
+      <h2 class="contact-title" id="contactTitle">まずは、<br><em>お気軽に。</em></h2>
+      <div class="contact-links">
+        <a href="mailto:info@shangrila.co.jp?subject=無料相談" class="clink">
+          <span>01 — 無料相談（30分・オンライン）</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H3M13 3v10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-      </h2>
-      <div class="contact-opts">
-        <a href="mailto:info@shangrila.co.jp?subject=無料相談" class="c-opt">
-          <span>01 — 無料相談</span>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H2M12 2v10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href="mailto:info@shangrila.co.jp?subject=お見積もり" class="clink">
+          <span>02 — お見積もり・ご相談</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H3M13 3v10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="mailto:info@shangrila.co.jp?subject=見積もり依頼" class="c-opt">
-          <span>02 — お見積もり</span>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H2M12 2v10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href="mailto:info@shangrila.co.jp" class="clink clink--mail">
+          <span>info@shangrila.co.jp</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13L13 3M13 3H3M13 3v10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </div>
@@ -201,8 +212,19 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <span>© 2026 Shangrila Co., Ltd.</span>
-    <nav><a href="#works">事業</a><a href="#concept">理念</a><a href="#about">概要</a><a href="#contact">連絡</a></nav>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x=".5" y=".5" width="11" height="11" stroke="var(--g)" stroke-width="1"/><path d="M3 6l2.5 2.5 4-4" stroke="var(--g)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        株式会社シャングリラ
+      </div>
+      <nav>
+        <a href="#about">会社について</a>
+        <a href="#services">事業内容</a>
+        <a href="#concept">コンセプト</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+      <span>© 2026 Shangrila Co., Ltd.</span>
+    </div>
   </footer>
 
   <script src="js/main.js"></script>
