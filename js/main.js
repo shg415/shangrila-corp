@@ -3,125 +3,104 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 /* ============================================
    LOADER
    ============================================ */
-const loaderCircle = document.querySelector('.loader__mark circle');
-const loaderPath   = document.querySelector('.loader__mark path');
-const loader       = document.getElementById('loader');
+gsap.set('.loader__text', { opacity: 0 });
 
-const loaderTl = gsap.timeline({
-  onComplete: () => { initPage(); }
-});
-
+const loaderTl = gsap.timeline({ onComplete: initPage });
 loaderTl
-  .to(loaderCircle,   { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' })
-  .to(loaderPath,     { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
-  .to('.loader__name',{ opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2')
-  .to(loader, {
-    yPercent: -100, duration: 1.0, ease: 'power3.inOut', delay: 0.4
-  });
-
-// Set initial states
-gsap.set('.loader__name', { opacity: 0, y: 10 });
+  .to('.loader__line', { width: 200, duration: 0.8, ease: 'power2.inOut' })
+  .to('.loader__text', { opacity: 1, duration: 0.4, ease: 'power2.out' }, '-=0.2')
+  .to('#loader', { yPercent: -100, duration: 0.9, ease: 'power3.inOut', delay: 0.3 });
 
 function initPage() {
-  loader.style.pointerEvents = 'none';
+  document.getElementById('loader').style.pointerEvents = 'none';
 
   // Hero entrance
   const heroTl = gsap.timeline();
   heroTl
-    .from('#heroTag', { opacity: 0, y: -12, duration: 0.6, ease: 'power2.out' })
-    .from('.hero__line', { y: '100%', duration: 1, stagger: 0.2, ease: 'power3.out' }, '-=0.3')
-    .from('#heroSub',    { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out' }, '-=0.4')
-    .from('#heroActions',{ opacity: 0, y: 16, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-    .from('.hero__scroll',{ opacity: 0, duration: 0.6 }, '-=0.3');
+    .from('.hero__tag',  { opacity: 0, y: -10, duration: 0.5, ease: 'power2.out' })
+    .from('.hero__title span', { y: '110%', duration: 0.9, stagger: 0.15, ease: 'power3.out' }, '-=0.2')
+    .from('.hero__desc',  { opacity: 0, y: 20, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+    .from('.hero__btns',  { opacity: 0, y: 16, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+    .from('#heroGeo',     { opacity: 0, x: 40, duration: 1.0, ease: 'power2.out' }, '-=0.8');
 
-  initScrollAnimations();
-}
-
-/* ============================================
-   NAV STATE
-   ============================================ */
-const nav = document.getElementById('nav');
-nav.classList.add('is-dark');
-
-const sections = [
-  { trigger: '.marquee',  enter: 'is-white', leave: 'is-dark' },
-  { trigger: '.concept',  enter: 'is-dark',  leave: 'is-white' },
-  { trigger: '.about',    enter: 'is-white', leave: 'is-dark' },
-  { trigger: '.contact',  enter: 'is-white', leave: 'is-dark' },
-  { trigger: '.footer',   enter: 'is-dark',  leave: 'is-white' },
-];
-
-sections.forEach(({ trigger, enter, leave }) => {
-  ScrollTrigger.create({
-    trigger,
-    start: 'top 64px',
-    onEnter:     () => { nav.classList.remove(leave);  nav.classList.add(enter); },
-    onLeaveBack: () => { nav.classList.remove(enter); nav.classList.add(leave); },
+  // Geo element animation (floating)
+  gsap.to('.geo-circle', {
+    attr: { r: 34 }, duration: 3, ease: 'sine.inOut', repeat: -1, yoyo: true
   });
-});
+  gsap.to('.geo-rect', {
+    rotation: 15, transformOrigin: 'center', duration: 6,
+    ease: 'sine.inOut', repeat: -1, yoyo: true
+  });
+
+  initScroll();
+}
 
 /* ============================================
    MOBILE MENU
    ============================================ */
 const menuBtn  = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
-menuBtn.addEventListener('click', () => {
+menuBtn?.addEventListener('click', () => {
   menuBtn.classList.toggle('active');
   navLinks.classList.toggle('active');
 });
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+navLinks?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   menuBtn.classList.remove('active');
   navLinks.classList.remove('active');
 }));
 
 /* ============================================
-   MARQUEE
+   TICKER
    ============================================ */
-const track = document.getElementById('marqueeTrack');
-const trackW = track.scrollWidth / 2;
-gsap.to(track, {
-  x: -trackW, duration: 25, ease: 'none', repeat: -1,
-  modifiers: { x: gsap.utils.unitize(x => parseFloat(x) % trackW) }
-});
+const track = document.getElementById('tickerTrack');
+if (track) {
+  const w = track.scrollWidth / 2;
+  gsap.to(track, {
+    x: -w, duration: 30, ease: 'none', repeat: -1,
+    modifiers: { x: gsap.utils.unitize(x => parseFloat(x) % w) }
+  });
+}
 
 /* ============================================
    SCROLL ANIMATIONS
    ============================================ */
-function initScrollAnimations() {
+function initScroll() {
 
-  // Hero parallax
-  gsap.to('#heroBg', {
-    yPercent: 18, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
-
-  // Services header
+  // Services head
   gsap.from('.services__head > *', {
-    opacity: 0, y: 30, duration: 0.8, stagger: 0.15, ease: 'power2.out',
+    opacity: 0, y: 24, duration: 0.8, stagger: 0.12, ease: 'power2.out',
     scrollTrigger: { trigger: '.services__head', start: 'top 82%' }
   });
 
-  // Service cards
-  gsap.utils.toArray('.svc-card').forEach((card, i) => {
-    gsap.from(card, {
-      opacity: 0, y: 40, duration: 0.8, ease: 'power2.out',
-      delay: (i % 3) * 0.1,
-      scrollTrigger: { trigger: card, start: 'top 88%' }
+  // Service rows — stagger in
+  gsap.utils.toArray('.svc-row').forEach((row, i) => {
+    gsap.from(row, {
+      opacity: 0, x: -24, duration: 0.7, ease: 'power2.out',
+      delay: i * 0.06,
+      scrollTrigger: { trigger: row, start: 'top 88%' }
     });
   });
 
-  // Concept section
-  gsap.to('#conceptBg', {
-    yPercent: 25, ease: 'none',
-    scrollTrigger: { trigger: '.concept', start: 'top bottom', end: 'bottom top', scrub: true }
+  // Concept
+  gsap.from('.concept__title', {
+    opacity: 0, y: 40, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.concept__title', start: 'top 80%' }
   });
-  gsap.from('.concept__quote p', {
-    opacity: 0, x: -40, duration: 1, stagger: 0.2, ease: 'power2.out',
-    scrollTrigger: { trigger: '.concept__quote', start: 'top 78%' }
-  });
-  gsap.from('.concept__body p', {
+  gsap.from('.concept__body', {
     opacity: 0, y: 20, duration: 0.8, stagger: 0.15, ease: 'power2.out',
-    scrollTrigger: { trigger: '.concept__body', start: 'top 80%' }
+    scrollTrigger: { trigger: '.concept__right', start: 'top 78%' }
+  });
+
+  // Counter
+  document.querySelectorAll('.cstat__num[data-target]').forEach(el => {
+    const target = +el.dataset.target;
+    ScrollTrigger.create({
+      trigger: el, start: 'top 85%', once: true,
+      onEnter: () => gsap.fromTo({ v: 0 }, { v: target }, {
+        duration: 1.6, ease: 'power2.out',
+        onUpdate() { el.textContent = Math.round(this.targets()[0].v); }
+      })
+    });
   });
 
   // About
@@ -129,29 +108,9 @@ function initScrollAnimations() {
     opacity: 0, x: -30, duration: 0.8, stagger: 0.12, ease: 'power2.out',
     scrollTrigger: { trigger: '.about__inner', start: 'top 78%' }
   });
-  gsap.from('.about__right > *', {
-    opacity: 0, x: 30, duration: 0.8, stagger: 0.12, ease: 'power2.out',
-    scrollTrigger: { trigger: '.about__inner', start: 'top 78%' }
-  });
-
-  // Counters
-  document.querySelectorAll('.stat__num[data-target]').forEach(el => {
-    const target = +el.dataset.target;
-    ScrollTrigger.create({
-      trigger: el, start: 'top 85%', once: true,
-      onEnter: () => {
-        gsap.fromTo({ v: 0 }, { v: target }, {
-          duration: 1.6, ease: 'power2.out',
-          onUpdate() { el.textContent = Math.round(this.targets()[0].v); }
-        });
-      }
-    });
-  });
-
-  // Value items
-  gsap.from('.value-item', {
-    opacity: 0, y: 20, duration: 0.7, stagger: 0.15, ease: 'power2.out',
-    scrollTrigger: { trigger: '.about__values', start: 'top 82%' }
+  gsap.from('.aval', {
+    opacity: 0, x: 30, duration: 0.7, stagger: 0.15, ease: 'power2.out',
+    scrollTrigger: { trigger: '.about__values', start: 'top 80%' }
   });
 
   // Contact
@@ -160,7 +119,7 @@ function initScrollAnimations() {
     scrollTrigger: { trigger: '.contact__title', start: 'top 82%' }
   });
   gsap.from('.contact-card', {
-    opacity: 0, y: 24, duration: 0.7, stagger: 0.15, ease: 'power2.out',
+    opacity: 0, y: 20, duration: 0.7, stagger: 0.15, ease: 'power2.out',
     scrollTrigger: { trigger: '.contact__cards', start: 'top 82%' }
   });
 }
